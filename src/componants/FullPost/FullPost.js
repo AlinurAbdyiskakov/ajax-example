@@ -23,6 +23,7 @@ const FullPost = ({ id }) => {
       <h1>{post.title}</h1>
       <p>{post.body}</p>
       <Comments postId={id} />
+      
     </main>
   );
 }
