@@ -1,26 +1,30 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Comments from "../Comments/Comments";
 import classes from "./FullPost.module.css";
-import Comments from"./componants/comments/comments";
-const FullPost = ({ id }) => {
-  const[post,setPost]=useState({
-  title:"Loading...",
-  body:"With for it!",
-  userId:0,
-    });
 
-    useEffect(()=>{ 
-      axios.get('https://jsonplaceholder.typicode.com/posts/'+id)
+const FullPost = ({ id }) => {
+  const [post, setPost] = useState({
+    title: "Loading...",
+    body: "Wait for it!",
+    userId: 0,
+  });
+
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
       .then((response) => {
-          const post =response.data;
-       setPost(post);
+        const post = response.data;
+        setPost(post);
       });
-      },[id]);
+  }, [id]);
+
   return (
     <main className={classes.FullPost}>
-      <h1>{post.name}</h1>
-      {/* <Author userId={post.userId}/> */}
+      <h1>{post.title}</h1>
       <p>{post.body}</p>
-      <Comments postId={id}/>
+      <Comments postId={id} />
     </main>
   );
 }
+
 export default FullPost;
